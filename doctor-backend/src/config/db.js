@@ -6,10 +6,11 @@ let pool;
 export const connectDB = async () => {
   try {
     pool = mysql.createPool({
-      host: "localhost",      // your MySQL server host
-      user: "root",           // your MySQL username
-      password: "Root@1234", // your MySQL password
-      database: "doctorsappointment",  // your database name
+      host: gondola.proxy.rlwy.net,      // your MySQL server host
+      user: "root",
+      port: 12238,           // your MySQL username
+      password: "XtkhZSbLpmfeWDQAlqxLvyfLmzqtZUKc", // your MySQL password
+      database: "railway",  // your database name
       waitForConnections: true,
       connectionLimit: 10,
       queueLimit: 0
