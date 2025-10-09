@@ -5,15 +5,20 @@ let pool;
 
 export const connectDB = async () => {
   try {
-    const connection = await mysql.createConnection({
+    pool = mysql.createPool({
       host: process.env.DB_HOST,
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      port: process.env.DB_PORT,
+      port: process.env.DB_PORT || 3306,
+      waitForConnections: true,
+      connectionLimit: 10,
+      queueLimit: 0,
     });
 
-    console.log("✅ Connected to MySQL database");
+    // Test connection
+    const [rows] = await pool.query("SELECT 1");
+    console.log("✅ Connected to MySQL database successfully");
     return pool;
   } catch (err) {
     console.error("❌ Database connection failed:", err.message);
