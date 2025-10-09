@@ -5,15 +5,12 @@ let pool;
 
 export const connectDB = async () => {
   try {
-    pool = mysql.createPool({
-      host: gondola.proxy.rlwy.net,      // your MySQL server host
-      user: "root",
-      port: 12238,           // your MySQL username
-      password: "XtkhZSbLpmfeWDQAlqxLvyfLmzqtZUKc", // your MySQL password
-      database: "railway",  // your database name
-      waitForConnections: true,
-      connectionLimit: 10,
-      queueLimit: 0
+    const connection = await mysql.createConnection({
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      port: process.env.DB_PORT,
     });
 
     console.log("✅ Connected to MySQL database");
