@@ -21,3 +21,8 @@ export const fetchSpecialtySuggestions = async (term: string) => {
   return res.data;
 };
 
+// Fetch doctor counts by specialty
+export const fetchDoctorCounts = async () => {
+  const res = await axios.get(`${API_BASE}/doctors/count-by-specialty`);
+  return res.data;
+};
