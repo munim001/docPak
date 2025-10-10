@@ -59,7 +59,7 @@ const iconMap: Record<string, any> = {
   "palliative care": Heart,
   "vascular surgery": Droplet,
   "ent surgery": Ear,
-  Anaesthesiology: anesthesia, // image
+  anaesthesiology: anesthesia, // image
 };
 
 export const Specialties = () => {
