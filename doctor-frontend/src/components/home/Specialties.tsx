@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 import skinImg from "@/assets/skin.png"; // dermatology image (optional)
+import anesthesia from "@/assets/anesthesia.png"; // anesthesia image (optional)
 
 type SpecialtyItem = { name: string; count: number };
 
@@ -58,7 +59,7 @@ const iconMap: Record<string, any> = {
   "palliative care": Heart,
   "vascular surgery": Droplet,
   "ent surgery": Ear,
-  Anaesthesiology: Syringe,
+  Anaesthesiology: anesthesia, // image
 };
 
 export const Specialties = () => {
