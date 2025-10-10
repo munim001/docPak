@@ -5,7 +5,7 @@ import { fetchSpecialties } from "@/api";
 
 // lucide icons
 import {
-  Heart, Brain, Bone, Eye, Baby, Stethoscope, Activity,
+  Heart, Brain, Bone, Eye, Baby, Stethoscope, Activity,Ear
   Thermometer, Scissors, FlaskRound, Bandage, Microscope,
   Shield, Droplet, Wind, Hospital, Beaker, Syringe, User, Radiation
 } from "lucide-react";
@@ -57,6 +57,7 @@ const iconMap: Record<string, any> = {
   "pain medicine": Syringe,
   "palliative care": Heart,
   "vascular surgery": Droplet,
+  "ent surgery": Ear,
 };
 
 export const Specialties = () => {
