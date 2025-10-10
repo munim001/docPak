@@ -75,8 +75,6 @@ app.get("/doctors/suggestions/:term", async (req, res) => {
   }
 });
 
-
-
   app.post("/auth/signup", async (req, res) => {
   const { name, email, phone, password } = req.body;
 
@@ -102,7 +100,30 @@ app.get("/doctors/suggestions/:term", async (req, res) => {
   }
 });
 
+// GET /doctors/specialties
+app.get("/doctors/specialties", async (req, res) => {
+  try {
+    // Trim and normalize specialties; ignore empty/null
+    const [rows] = await db.query(`
+      SELECT LOWER(TRIM(specialty)) AS name, COUNT(*) AS count
+      FROM railway.doctors_lnh
+      WHERE specialty IS NOT NULL AND TRIM(specialty) != ''
+      GROUP BY LOWER(TRIM(specialty))
+      ORDER BY name;
+    `);
 
+    // Convert names back to readable Title Case for display (optional)
+    const result = rows.map(r => ({
+      name: r.name.split(' ').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' '),
+      count: r.count
+    }));
+
+    res.json(result);
+  } catch (err) {
+    console.error("Error fetching specialties:", err);
+    res.status(500).json({ message: "Error fetching specialties" });
+  }
+});
 
 
   app.listen(PORT, () => {
