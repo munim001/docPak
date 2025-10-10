@@ -103,22 +103,6 @@ app.get("/doctors/suggestions/:term", async (req, res) => {
 });
 
 
-// ✅ Get count of doctors by specialty
-app.get("/doctors/count-by-specialty", async (req, res) => {
-  try {
-    const [rows] = await db.query(`
-      SELECT specialty, COUNT(*) AS count
-      FROM railway.doctors_lnh
-      GROUP BY specialty
-      ORDER BY specialty;
-    `);
-
-    res.json(rows);
-  } catch (err) {
-    console.error("❌ Error fetching doctor counts:", err);
-    res.status(500).json({ message: "Error fetching doctor counts" });
-  }
-});
 
 
   app.listen(PORT, () => {
