@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 // import {  Eye, Baby, Stethoscope, Activity, Pill } from "lucide-react";
 import { Link } from "react-router-dom";
-import skinDermatology from "@/assets/skin.png";
+import skinDermatology from "@/assets/dermatology.svg";
 import {
   Heart,
   Brain,
@@ -27,6 +27,7 @@ import {
   Beaker,
   Thermometer,
   Wind,
+  icons,
 } from "lucide-react";
 
 export const specialties = [
@@ -37,7 +38,7 @@ export const specialties = [
   { name: "Ophthalmology", icon: Eye, count: "140+ Doctors", color: "text-cyan-500" },
   { name: "Paediatric Medicine", icon: Baby, count: "290+ Doctors", color: "text-pink-500" },
   { name: "Internal Medicine", icon: Activity, count: "220+ Doctors", color: "text-orange-500" },
-  { name: "Dermatology", icon: skinDermatology, count: "160+ Doctors", color: "text-green-500" },
+  { name: "Dermatology", image: skinDermatology, count: "160+ Doctors", color: "text-green-500" },
   { name: "Endocrinology", icon: FlaskRound, count: "100+ Doctors", color: "text-amber-500" },
   { name: "Gastroenterology", icon: Thermometer, count: "120+ Doctors", color: "text-yellow-600" },
   { name: "General Surgery", icon: Scissors, count: "200+ Doctors", color: "text-gray-600" },
@@ -85,7 +86,17 @@ export const Specialties = () => {
                 <Card className="group cursor-pointer p-6 hover:shadow-medium transition-smooth border-2 hover:border-primary/50">
                   <div className="flex flex-col items-center text-center space-y-4">
                     <div className="p-4 rounded-full bg-primary-light group-hover:bg-primary group-hover:scale-110 transition-smooth">
-                      <Icon className={`h-8 w-8 ${specialty.color} group-hover:text-primary-foreground`} />
+                      {Icon ? (
+                        <Icon
+                          className={`h-8 w-8 ${specialty.color} group-hover:text-primary-foreground`}
+                        />
+                      ) : (
+                        <img
+                          src={specialty.image}
+                          alt={specialty.name}
+                          className="h-10 w-10 object-contain rounded-full"
+                        />
+                      )}
                     </div>
                     <div>
                       <h3 className="font-semibold text-lg group-hover:text-primary transition-smooth">
