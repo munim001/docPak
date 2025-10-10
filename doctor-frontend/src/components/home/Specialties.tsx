@@ -5,7 +5,7 @@ import { fetchSpecialties } from "@/api";
 
 // lucide icons
 import {
-  Heart, Brain, Bone, Eye, Baby, Stethoscope, Activity,Ear
+  Heart, Brain, Bone, Eye, Baby, Stethoscope, Activity,Ear,
   Thermometer, Scissors, FlaskRound, Bandage, Microscope,
   Shield, Droplet, Wind, Hospital, Beaker, Syringe, User, Radiation
 } from "lucide-react";
