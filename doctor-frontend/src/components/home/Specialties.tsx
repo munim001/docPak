@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 // import {  Eye, Baby, Stethoscope, Activity, Pill } from "lucide-react";
 import { Link } from "react-router-dom";
-
+import skinDermatology from "@/assets/skin.png";
 import {
   Heart,
   Brain,
@@ -37,7 +37,7 @@ export const specialties = [
   { name: "Ophthalmology", icon: Eye, count: "140+ Doctors", color: "text-cyan-500" },
   { name: "Paediatric Medicine", icon: Baby, count: "290+ Doctors", color: "text-pink-500" },
   { name: "Internal Medicine", icon: Activity, count: "220+ Doctors", color: "text-orange-500" },
-  { name: "Dermatology", icon: Sparkles, count: "160+ Doctors", color: "text-green-500" },
+  { name: "Dermatology", icon: skinDermatology, count: "160+ Doctors", color: "text-green-500" },
   { name: "Endocrinology", icon: FlaskRound, count: "100+ Doctors", color: "text-amber-500" },
   { name: "Gastroenterology", icon: Thermometer, count: "120+ Doctors", color: "text-yellow-600" },
   { name: "General Surgery", icon: Scissors, count: "200+ Doctors", color: "text-gray-600" },
