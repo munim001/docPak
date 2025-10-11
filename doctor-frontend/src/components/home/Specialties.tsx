@@ -23,7 +23,8 @@ const toKey = (s: string) => s.trim().toLowerCase();
 const iconMap: Record<string, any> = {
   cardiology: Heart,
   cardiologist: Heart,
-  "Cardiology (Heart Specialist)": Heart,
+  "cardiology (heart specialist)": Heart,
+  "cardiac surgery (heart surgery)": cardiac_surgery,
   neurology: Brain,
   neurosurgery: Brain,
   orthopaedic: Bone,
