@@ -42,6 +42,7 @@ const iconMap: Record<string, any> = {
   "general medicine": Stethoscope,
   dermatology: skinImg, // image
   dermatologists: skinImg,
+  "dermatology (skin specialist)": skinImg,
   internal: Activity,
   "internal medicine": Activity,
   endocrinology: FlaskRound,
@@ -71,6 +72,9 @@ const iconMap: Record<string, any> = {
   "breast surgery": breast_surgery,
   "cardiac surgery": cardiac_surgery,
   "Cardiac Surgery (Heart Surgery)": cardiac_surgery,
+  "gynaecology & obstetrics": Baby,
+  "obstetrics & gynaecology": Baby,
+  "obstetrics and gynaecology": Baby,
 };
 
 export const Specialties = () => {
