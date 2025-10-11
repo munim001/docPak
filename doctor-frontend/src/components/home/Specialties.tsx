@@ -17,6 +17,7 @@ import breast_surgery from "@/assets/breast.png"; // breast surgery image (optio
 import cardiac_surgery from "@/assets/cardiac.png"; // cardiac surgery image (optional)
 import chest_medicine from "@/assets/chest.png"; // chest medicine image (optional)
 import dental_surgery from "@/assets/dental-surgery.png"; // dental surgery image (optional)
+import gastroenterology from "@/assets/Gastroenterology.png"; // gastroenterology image (optional)
 
 type SpecialtyItem = { name: string; count: number };
 
@@ -24,7 +25,7 @@ const toKey = (s: string) => s.trim().toLowerCase();
 
 // map normalized name => icon component or image path
 const iconMap: Record<string, any> = {
-  cardiology: Heart,
+  cardiology: cardiac_surgery,
   cardiologist: Heart,
   "cardiology (heart specialist)": Heart,
   "cardiac surgery (heart surgery)": cardiac_surgery,
@@ -48,7 +49,7 @@ const iconMap: Record<string, any> = {
   internal: Activity,
   "internal medicine": Activity,
   endocrinology: FlaskRound,
-  gastroenterology: Thermometer,
+  gastroenterology: gastroenterology,
   "general surgery": Scissors,
   dentistry: Bandage,
   psychiatry: Brain,
