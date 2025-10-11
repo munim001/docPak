@@ -13,6 +13,7 @@ import {
 import skinImg from "@/assets/skin.png"; // dermatology image (optional)
 import anesthesia from "@/assets/anesthesia.png"; // anesthesia image (optional)
 import breast_surgery from "@/assets/breast.png"; // breast surgery image (optional)
+import cardiac_surgery from "@/assets/cardiac.png"; // cardiac surgery image (optional)
 
 type SpecialtyItem = { name: string; count: number };
 
@@ -22,6 +23,7 @@ const toKey = (s: string) => s.trim().toLowerCase();
 const iconMap: Record<string, any> = {
   cardiology: Heart,
   cardiologist: Heart,
+  "Cardiology (Heart Specialist)": Heart,
   neurology: Brain,
   neurosurgery: Brain,
   orthopaedic: Bone,
@@ -62,6 +64,8 @@ const iconMap: Record<string, any> = {
   "ent surgery": Ear,
   anaesthesiology: anesthesia, // image
   "breast surgery": breast_surgery,
+  "cardiac surgery": cardiac_surgery,
+  "Cardiac Surgery (Heart Surgery)": cardiac_surgery,
 };
 
 export const Specialties = () => {
