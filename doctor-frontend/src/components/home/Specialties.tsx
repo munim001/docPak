@@ -7,7 +7,8 @@ import { fetchSpecialties } from "@/api";
 import {
   Heart, Brain, Bone, Eye, Baby, Stethoscope, Activity,Ear,
   Thermometer, Scissors, FlaskRound, Bandage, Microscope,
-  Shield, Droplet, Wind, Hospital, Beaker, Syringe, User, Radiation
+  Shield, Droplet, Wind, Hospital, Beaker, Syringe, User, Radiation,
+  SyringeIcon
 } from "lucide-react";
 
 import skinImg from "@/assets/skin.png"; // dermatology image (optional)
@@ -78,7 +79,7 @@ const iconMap: Record<string, any> = {
   "obstetrics & gynaecology": Baby,
   "obstetrics and gynaecology": Baby,
   "dental & maxilofacial surgery":dental_surgery,
-  "diabatology":diabatology, // image
+  "diabatology":SyringeIcon, // image
 };
 
 export const Specialties = () => {
