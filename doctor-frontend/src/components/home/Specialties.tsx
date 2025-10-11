@@ -16,8 +16,7 @@ import anesthesia from "@/assets/anesthesia.png"; // anesthesia image (optional)
 import breast_surgery from "@/assets/breast.png"; // breast surgery image (optional)
 import cardiac_surgery from "@/assets/cardiac.png"; // cardiac surgery image (optional)
 import chest_medicine from "@/assets/chest.png"; // chest medicine image (optional)
-import dental_surgery from "@/assets/Dental_Surgery.png"; // dental surgery image (optional)
-import diabatology from "@/assets/daibatology.png"; // diabatology image (optional)
+import dental_surgery from "@/assets/dental-surgery.png"; // dental surgery image (optional)
 
 type SpecialtyItem = { name: string; count: number };
 
