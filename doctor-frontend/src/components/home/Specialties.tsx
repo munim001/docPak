@@ -12,6 +12,7 @@ import {
 
 import skinImg from "@/assets/skin.png"; // dermatology image (optional)
 import anesthesia from "@/assets/anesthesia.png"; // anesthesia image (optional)
+import breast_surgery from "@/assets/breast.png"; // breast surgery image (optional)
 
 type SpecialtyItem = { name: string; count: number };
 
@@ -60,6 +61,7 @@ const iconMap: Record<string, any> = {
   "vascular surgery": Droplet,
   "ent surgery": Ear,
   anaesthesiology: anesthesia, // image
+  "breast surgery": breast_surgery,
 };
 
 export const Specialties = () => {
