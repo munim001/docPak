@@ -57,7 +57,6 @@ const iconMap: Record<string, any> = {
   psychiatry: Brain,
   radiology: Radiation,
   pulmonology: Wind,
-  nephrology: Droplet,
   urology: Droplet,
   rheumatology: Shield,
   haematology: Droplet,
