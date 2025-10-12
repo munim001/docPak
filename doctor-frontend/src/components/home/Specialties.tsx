@@ -19,6 +19,7 @@ import chest_medicine from "@/assets/chest.png"; // chest medicine image (option
 import dental_surgery from "@/assets/dental-surgery.png"; // dental surgery image (optional)
 import gastroenterology from "@/assets/Gastroenterology.png"; // gastroenterology image (optional)
 import nephrology from "@/assets/nephrology.png"; // nephrology image (optional)
+import urology from "@/assets/Urology.png"; // urology image (optional)
 
 type SpecialtyItem = { name: string; count: number };
 
@@ -57,7 +58,7 @@ const iconMap: Record<string, any> = {
   psychiatry: Brain,
   radiology: Radiation,
   pulmonology: Wind,
-  urology: Droplet,
+  urology: urology,
   rheumatology: Shield,
   haematology: Droplet,
   oncology: Beaker,
