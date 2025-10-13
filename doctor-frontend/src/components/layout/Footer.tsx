@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Heart, Hospital, Mail, MapPin, Phone } from "lucide-react";
-import hospital from "@/assets/Red Green Minimalist Medical Logo.png";
+import hospital from "@/assets/Doctors_Pak_logo.jpg";
 
 export const Footer = () => {
   return (

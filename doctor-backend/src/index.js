@@ -125,6 +125,15 @@ app.get("/doctors/specialties", async (req, res) => {
   }
 });
 
+// ✅ API to get total count
+app.get("/doctors/count", (req, res) => {
+  const query = "SELECT COUNT(*) AS DoctorCount FROM railway.doctors_lnh";
+  db.query(query, (err, results) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({ DoctorCount: results[0].DoctorCount });
+  });
+});
+
 
   app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
