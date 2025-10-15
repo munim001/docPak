@@ -25,7 +25,7 @@ connectDB().then(async (db) => {
   // --- Get All Doctors ---
   app.get("/doctors", async (req, res) => {
     try {
-      const [rows] = await db.query("SELECT * FROM doctors_lnh");
+      const [rows] = await db.query("SELECT * FROM railway.doctors_lnh");
       res.json(rows);
     } catch (err) {
       console.error("❌ Error fetching doctors:", err);
@@ -38,7 +38,7 @@ connectDB().then(async (db) => {
     try {
       const { specialty } = req.params;
       const [rows] = await db.query(
-        "SELECT * FROM doctors_lnh WHERE specialty = ?",
+        "SELECT * FROM railway.doctors_lnh WHERE specialty = ?",
         [specialty]
       );
 
@@ -61,7 +61,7 @@ app.get("/doctors/suggestions/:term", async (req, res) => {
 
     // MySQL query to find specialties that match user input
     const [rows] = await db.query(
-      "SELECT DISTINCT specialty FROM doctors_lnh WHERE specialty LIKE ? LIMIT 10",
+      "SELECT DISTINCT specialty FROM railway.doctors_lnh WHERE specialty LIKE ? LIMIT 10",
       [`%${term}%`]
     );
 
