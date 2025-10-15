@@ -26,3 +26,9 @@ export const fetchSpecialties = async () => {
   const res = await axios.get(`${API_BASE}/doctors/specialties`);
   return res.data; // [{ name: string, count: number }, ... ]
 };
+
+// Fetch total doctor count
+export const fetchDoctorCount = async () => {
+  const res = await axios.get(`${API_BASE}/doctors/count`);
+  return res.data; // { DoctorCount: number }
+};
