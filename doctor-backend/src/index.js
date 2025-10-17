@@ -6,23 +6,24 @@ import cors from "cors";
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.use(cors()); // allow all origins for testing
-app.use(express.json()); // parse application/json
+app.use(cors());
+app.use(express.json());
 
+// Default route
 app.get("/", (req, res) => {
   res.send("Doctor Appointment API is running...");
 });
 
+// Connect to MySQL
 connectDB().then(async (db) => {
   try {
-    const [rows] = await db.query("SHOW TABLES"); // test query
-    console.log("📂 Tables in DB:", rows);
+    const [rows] = await db.query("SHOW TABLES");
+    console.log("📂 Tables in DB:", rows.map((r) => Object.values(r)[0]));
   } catch (err) {
     console.error("❌ Test query failed:", err.message);
   }
 
-  // ✅ Doctors API 
-  // --- Get All Doctors ---
+  // ✅ Get all doctors
   app.get("/doctors", async (req, res) => {
     try {
       const [rows] = await db.query("SELECT * FROM railway.doctors_lnh");
@@ -33,7 +34,7 @@ connectDB().then(async (db) => {
     }
   });
 
-  // --- Get Doctors by Specialty ---
+  // ✅ Get doctors by specialty
   app.get("/doctors/specialty/:specialty", async (req, res) => {
     try {
       const { specialty } = req.params;
@@ -43,7 +44,9 @@ connectDB().then(async (db) => {
       );
 
       if (rows.length === 0) {
-        return res.status(404).json({ message: "No doctors found for this specialty" });
+        return res
+          .status(404)
+          .json({ message: "No doctors found for this specialty" });
       }
 
       res.json(rows);
@@ -53,88 +56,93 @@ connectDB().then(async (db) => {
     }
   });
 
-  // In your index.js
-// ✅ Get specialty suggestions (autocomplete)
-app.get("/doctors/suggestions/:term", async (req, res) => {
-  try {
-    const { term } = req.params;
+  // ✅ Get specialty suggestions (autocomplete)
+  app.get("/doctors/suggestions/:term", async (req, res) => {
+    try {
+      const { term } = req.params;
 
-    // MySQL query to find specialties that match user input
-    const [rows] = await db.query(
-      "SELECT DISTINCT specialty FROM railway.doctors_lnh WHERE specialty LIKE ? LIMIT 10",
-      [`%${term}%`]
-    );
+      const [rows] = await db.query(
+        "SELECT DISTINCT specialty FROM railway.doctors_lnh WHERE specialty LIKE ? LIMIT 10",
+        [`%${term}%`]
+      );
 
-    // Convert to simple array of strings
-    const suggestions = rows.map((row) => row.specialty);
+      const suggestions = rows.map((row) => row.specialty);
+      res.json(suggestions);
+    } catch (err) {
+      console.error("❌ Error fetching suggestions:", err);
+      res.status(500).json({ message: "Error fetching suggestions" });
+    }
+  });
 
-    res.json(suggestions);
-  } catch (err) {
-    console.error("❌ Error fetching suggestions:", err);
-    res.status(500).json({ message: "Error fetching suggestions" });
-  }
-});
-
+  // ✅ Signup (auth)
   app.post("/auth/signup", async (req, res) => {
-  const { name, email, phone, password } = req.body;
+    const { name, email, phone, password } = req.body;
 
-  if (!name || !email || !password) {
-    return res.status(400).json({ message: "All fields are required" });
-  }
-
-  try {
-    const [existingUser] = await db.query("SELECT * FROM users WHERE email = ?", [email]);
-    if (existingUser.length > 0) {
-      return res.status(400).json({ message: "User already exists" });
+    if (!name || !email || !password) {
+      return res.status(400).json({ message: "All fields are required" });
     }
 
-    await db.query(
-      "INSERT INTO users (name, email, phone, password) VALUES (?, ?, ?, ?)",
-      [name, email, phone, password]
-    );
+    try {
+      const [existingUser] = await db.query(
+        "SELECT * FROM users WHERE email = ?",
+        [email]
+      );
+      if (existingUser.length > 0) {
+        return res.status(400).json({ message: "User already exists" });
+      }
 
-    res.status(201).json({ message: "Account created successfully" });
-  } catch (err) {
-    console.error("❌ Error during signup:", err);
-    res.status(500).json({ message: "Error creating account" });
-  }
-});
+      await db.query(
+        "INSERT INTO users (name, email, phone, password) VALUES (?, ?, ?, ?)",
+        [name, email, phone, password]
+      );
 
-// GET /doctors/specialties
-app.get("/doctors/specialties", async (req, res) => {
-  try {
-    // Trim and normalize specialties; ignore empty/null
-    const [rows] = await db.query(`
-      SELECT LOWER(TRIM(specialty)) AS name, COUNT(*) AS count
-      FROM railway.doctors_lnh
-      WHERE specialty IS NOT NULL AND TRIM(specialty) != ''
-      GROUP BY LOWER(TRIM(specialty))
-      ORDER BY name;
-    `);
-
-    // Convert names back to readable Title Case for display (optional)
-    const result = rows.map(r => ({
-      name: r.name.split(' ').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' '),
-      count: r.count
-    }));
-
-    res.json(result);
-  } catch (err) {
-    console.error("Error fetching specialties:", err);
-    res.status(500).json({ message: "Error fetching specialties" });
-  }
-});
-
-// ✅ API to get total count
-app.get("/doctors/count", (req, res) => {
-  const query = "SELECT COUNT(*) AS DoctorCount FROM railway.doctors_lnh";
-  db.query(query, (err, results) => {
-    if (err) return res.status(500).json({ error: err.message });
-    res.json({ DoctorCount: results[0].DoctorCount });
+      res.status(201).json({ message: "Account created successfully" });
+    } catch (err) {
+      console.error("❌ Error during signup:", err);
+      res.status(500).json({ message: "Error creating account" });
+    }
   });
-});
 
+  // ✅ Get all specialties and counts
+  app.get("/doctors/specialties", async (req, res) => {
+    try {
+      const [rows] = await db.query(`
+        SELECT LOWER(TRIM(specialty)) AS name, COUNT(*) AS count
+        FROM railway.doctors_lnh
+        WHERE specialty IS NOT NULL AND TRIM(specialty) != ''
+        GROUP BY LOWER(TRIM(specialty))
+        ORDER BY name;
+      `);
 
+      const result = rows.map((r) => ({
+        name: r.name
+          .split(" ")
+          .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+          .join(" "),
+        count: r.count,
+      }));
+
+      res.json(result);
+    } catch (err) {
+      console.error("❌ Error fetching specialties:", err);
+      res.status(500).json({ message: "Error fetching specialties" });
+    }
+  });
+
+  // ✅ Get total count of doctors
+  app.get("/doctors/count", async (req, res) => {
+    try {
+      const [rows] = await db.query(
+        "SELECT COUNT(*) AS DoctorCount FROM railway.doctors_lnh"
+      );
+      res.json({ DoctorCount: rows[0].DoctorCount });
+    } catch (err) {
+      console.error("❌ Error fetching doctor count:", err);
+      res.status(500).json({ message: "Error fetching doctor count" });
+    }
+  });
+
+  // Start server
   app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
   });

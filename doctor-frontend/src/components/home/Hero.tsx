@@ -2,8 +2,31 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import heroImage from "@/assets/hero-medical.jpg";
+import { fetchDoctorCount } from "@/api";
+import { useEffect, useState } from "react";
 
 export const Hero = () => {
+
+  const [doctorCount, setDoctorCount] = useState<number | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+
+     const loadDoctorCount = async () => {
+      try {
+        const data = await fetchDoctorCount();
+        setDoctorCount(data.DoctorCount);
+      } catch (err) {
+        console.error("Error fetching doctor count:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadDoctorCount();
+  }, []);
+
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-primary-light to-background">
       {/* Background pattern */}
@@ -44,7 +67,7 @@ export const Hero = () => {
             {/* Stats */}
             <div className="flex flex-wrap justify-center sm:justify-start gap-6 pt-6">
               <div className="text-center sm:text-left">
-                <div className="text-xl sm:text-2xl font-bold text-foreground">2,500+</div>
+                <div className="text-xl sm:text-2xl font-bold text-foreground">{doctorCount}+</div>
                 <div className="text-sm text-muted-foreground">Expert Doctors</div>
               </div>
               <div className="h-10 w-px bg-border hidden sm:block" />
