@@ -86,12 +86,12 @@ export const Hero = () => {
           {/* Right Image */}
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent rounded-2xl blur-2xl hidden lg:block" />
-            <img 
-              src={heroImage} 
-              alt="Healthcare professionals" 
-              className="relative rounded-2xl shadow-glow object-cover w-full h-64 sm:h-80 md:h-96 lg:h-[500px]"
-            />
-          </div>
+              <img 
+                src={heroImage} 
+                alt="Healthcare professionals" 
+                className="relative rounded-2xl shadow-glow object-contain w-full h-64 sm:h-80 md:h-96 lg:h-[500px] mx-auto"
+              />
+            </div>
         </div>
       </div>
     </section>
