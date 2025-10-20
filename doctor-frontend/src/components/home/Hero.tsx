@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
-import heroImage from "@/assets/hero-medical.jpg";
+import heroImage from "@/assets/main_banner.jpg";
 import { fetchDoctorCount } from "@/api";
 import { useEffect, useState } from "react";
 
